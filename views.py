@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-# from mtapp.models import Student, Scorelist
+from mtapp.models import Student, Scorelist
 from myapp.models import *
 from django.forms.models import model_to_dict
 
@@ -13,16 +13,16 @@ def test(request):
 
 
 
-# datas = Student.objects.all() #querySet內是Student物件
-    # # print(type(datas))
-    # for data in datas:
-    #     # print(type(data))
-    #     print(model_to_dict(data)) #物件轉成字典格式
+datas = Student.objects.all() #querySet內是Student物件
+    print(type(datas))
+    for data in datas:
+        print(type(data))
+        print(model_to_dict(data)) #物件轉成字典格式
     ############################################
-    # datas = Student.objects.values('cSex').distinct()
-    # for data in datas:
-    #     # print(type(data))#dict
-    #     print(data)
+    datas = Student.objects.values('cSex').distinct()
+    for data in datas:
+    #     print(type(data))#dict
+        print(data)
     ############################################
 # datas = Student.objects.values('cSex').distinct()
 # for data in datas:
@@ -30,34 +30,34 @@ def test(request):
 #         print(data)
     ############################################
     # 想要由 students 資料表中找出座號大於 5 的男生
-    #__get #greater
+    __get #greater
     #
-    # datas = Student.objects.filter(cID__gt=5,cSex='F')
-    # for data in datas:
-    #     # print(data)
-    #     print(model_to_dict(data))
+    datas = Student.objects.filter(cID__gt=5,cSex='F')
+    for data in datas:
+    #     print(data)
+        print(model_to_dict(data))
     ############################################
     from django.db.models import Q
-    # datas = Student.objects.filter(
-    #     ~Q(cID__gt=5) & Q(cSex='M')
-    # )
-    # for data in datas:
-    #     #print(data)
-    #     print(model_to_dict(data))
+    datas = Student.objects.filter(
+        ~Q(cID__gt=5) & Q(cSex='M')
+    )
+    for data in datas:
+    #    print(data)
+        print(model_to_dict(data))
 
-    # datas = Student.objects.filter(
-    #     Q(cID=1) | Q(cID__gte=8)
-    # )
-    # for data in datas:
-    #     # print(data)
-    #     print(model_to_dict(data))
+    datas = Student.objects.filter(
+        Q(cID=1) | Q(cID__gte=8)
+    )
+    for data in datas:
+    #     print(data)
+        print(model_to_dict(data))
     ############################################
     # 由 students 資料表中找出座號大於等於 4 且小於等於 6 的學生資料
-    # datas = Student.objects.filter(cID__range=[4,6])
+    datas = Student.objects.filter(cID__range=[4,6])
 
-    # for data in datas:
-    #     #print(data)
-    #     print(model_to_dict(data))
+    for data in datas:
+    #    print(data)
+         print(model_to_dict(data))
     ############################################
     # 想要由 students 資料表中找出座號為 1,3,5,7,9 的學生資料
     # datas = Student.objects.filter(cID__in=[1,3,5,7,9])
@@ -183,6 +183,8 @@ def test(request):
         if course_exists:
             Scorelist.objects.filter(cID=student_data, course='國文').delete()
             print("國文成績修改成功")
+    ############################################
+
 
 
 
